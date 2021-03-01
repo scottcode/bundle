@@ -69,10 +69,9 @@ def build(args):
     config["proj_dest"] = proj_dest
     print("Copying project tree")
     if "ignore" in config:
-        copytree(args.source, proj_dest, ignore=ignore_patterns(*config["ignore"], proj_dest), 
-            dirs_exist_ok=True)
+        copytree(args.source, proj_dest, ignore=ignore_patterns(*config["ignore"], proj_dest))
     else:
-        copytree(args.source, proj_dest, dirs_exist_ok=True)
+        copytree(args.source, proj_dest)
 
     templates = template_path.glob('**/*')
     templates = [x for x in templates if x.is_file()]

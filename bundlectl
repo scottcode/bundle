@@ -2,6 +2,7 @@
 import argparse
 import os
 import sys
+import logging
 import pathlib
 import yaml
 import re
@@ -9,6 +10,14 @@ import base64
 from getpass import getpass
 import subprocess
 import bundle
+
+
+logging.basicConfig(
+    fmt="%(name)s:%(asctime)s:%(levelname)s:%(message)s",
+    datefmt='%Y-%m-%d %H:%M:%S',
+    level=logging.DEBUG,
+)
+logger = logging.getLogger(__name__)
 
 package_path = pathlib.Path(bundle.__file__).parent.parent
 
@@ -91,6 +100,7 @@ def build(args):
 
     for tf in templates:
         tmp = tf.relative_to(template_path)
+        logger.info("Working")
         if str(tmp) == "config.yaml":
             with open(str(tf)) as file:
                 base_config = yaml.load(file, Loader=yaml.FullLoader)

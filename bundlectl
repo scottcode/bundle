@@ -112,11 +112,14 @@ def build(args):
                 text_file.write(res)
     
     global_req = pathlib.Path(config["name"]) / "requirements.txt"
-    subprocess.run(["pipreqs", proj_dest, "--savepath", str(global_req)])
+    pipreqs_command = ["pipreqs", proj_dest, "--savepath", str(global_req)]
+    print("Running {!r}".format(pipreqs_command))
+    subprocess.run(pipreqs_command)
     
     import tarfile
     filename = config["name"] + '/context.tar.gz'
     if os.path.exists(filename):
+        print(f"Removing existing context file: {filename}")
         os.remove(filename)
     with tarfile.open(filename, mode='w:gz') as archive:
         print("Archiving")

@@ -129,7 +129,7 @@ def build(args):
                 text_file.write(res)
     
     global_req = pathlib.Path(config["name"]) / "requirements.txt"
-    pipreqs_args = [proj_dest, "--savepath", str(global_req)]
+    pipreqs_args = {'<path>': proj_dest, "--savepath": str(global_req)}
     print("Running pipreqs")
     pipreqs_init(pipreqs_args)
     

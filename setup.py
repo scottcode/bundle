@@ -12,7 +12,7 @@ def gen_data_files(dirs):
     print(results)
     return results
 
-setup(
+setup_kwargs = dict(
     name='bundle',
     version='0.0.1',
     packages=find_packages(),
@@ -29,5 +29,8 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    data_files=gen_data_files(["templates"]),
+    package_data={"": "templates/**"},
 )
+
+if __name__ == '__main__':
+    setup(**setup_kwargs)
